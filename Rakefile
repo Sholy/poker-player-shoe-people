@@ -21,6 +21,7 @@ task :init do
 	if `git remote show -n heroku` =~ /git@heroku.com:(.+)\.git/
 		host = $1
 		sh "heroku config:set HOST=#{host}.herokuapp.com"
+		sh "heroku config:set PORT=8080"
 	else
 		puts "Could not detect app hostname. Please configure your HOST environment variable manually"
 	end
