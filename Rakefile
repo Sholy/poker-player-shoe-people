@@ -17,7 +17,7 @@ end
 
 desc "Creates a Heroku app"
 task :init do
-	sh "heroku create --stack cedar --buildpack http://github.com/BenHall/heroku-buildpack-mono"
+	sh "heroku create --stack cedar-14 --buildpack http://github.com/BenHall/heroku-buildpack-mono"
 	if `git remote show -n heroku` =~ /git@heroku.com:(.+)\.git/
 		host = $1
 		sh "heroku config:set HOST=#{host}.herokuapp.com"
