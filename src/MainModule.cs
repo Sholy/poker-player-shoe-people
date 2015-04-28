@@ -24,7 +24,7 @@ namespace Nancy.Simple
 				switch (action) {
 				case "bet_request":
 				{
-					JObject json = JObject.Parse (form ["game_state"]);
+					var json = JObject.Parse (form ["game_state"]);
 					var bet = PokerPlayer.BetRequest (json).ToString ();
 					var betBytes = Encoding.UTF8.GetBytes (bet);
 					var response = new Response {
