@@ -22,6 +22,8 @@ task :init do
 		host = $1
 		sh "heroku config:set HOST=#{host}.herokuapp.com"
 		sh "heroku config:set PORT=8080"
+		sh "echo \"HOST=#{host}\" >> .env"
+		sh "echo \"PORT=8080\" >> .env"
 	else
 		puts "Could not detect app hostname. Please configure your HOST environment variable manually"
 	end
