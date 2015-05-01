@@ -25,9 +25,9 @@ namespace Nancy.Simple
 			get {
 				switch (CurrentEnv) {
 				case Env.Staging:
-					return new Uri ("http://localhost:" + StagingPort);
+					return new Uri ("http://0.0.0.0:8080");
 				case Env.Deployment:
-					return new Uri ("http://" + HOST + ":" + PORT);
+					return new Uri ("http://0.0.0.0:8080");
 				default:
 					throw new Exception ("Unexpected environment");
 				}
