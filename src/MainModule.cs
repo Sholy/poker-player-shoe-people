@@ -37,8 +37,8 @@ namespace Nancy.Simple
 				case "showdown":
 				{
 					var json = JObject.Parse (form ["game_state"]);
-					Int16 showDown = PokerPlayer.ShowDown (json);
-					var showDownBytes = Encoding.UTF8.GetBytes ( "OK" );
+					PokerPlayer.ShowDown (json);
+					var showDownBytes = Encoding.UTF8.GetBytes ("OK");
 					var response = new Response {
 						ContentType = "text/plain",
 						Contents = s => s.Write (showDownBytes, 0, showDownBytes.Length),
