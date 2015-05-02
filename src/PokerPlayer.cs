@@ -3,7 +3,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Nancy.Simple
 {
-	public class PokerPlayer
+	public static class PokerPlayer
 	{
 		public static readonly string VERSION = "Default C# folding player";
 
@@ -13,10 +13,9 @@ namespace Nancy.Simple
 			return 0;
 		}
 
-		public static int ShowDown(JObject gameState)
+		public static void ShowDown(JObject gameState)
 		{
 			//TODO: Use this method to showdown
-			return 0;
 		}
 	}
 }
