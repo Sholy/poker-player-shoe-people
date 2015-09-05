@@ -15,6 +15,11 @@ namespace Nancy.Simple
             try
             {
                 IEnumerable<JToken> players = gameState.SelectTokens("players");
+                IEnumerable<JToken> gameChildren = gameState.Children();
+                foreach(JToken child in gameChildren)
+                {
+                    Console.WriteLine(child);
+                }
                 Console.WriteLine("players parsed");
 
 
@@ -23,6 +28,11 @@ namespace Nancy.Simple
                     Console.WriteLine("reading player");
                     JToken playerName = (string)playerToken.SelectToken("name");
                     Console.WriteLine("player name: " + playerName);
+                    IEnumerable<JToken> childrenTokens = playerToken.Children();
+                    foreach(JToken child in childrenTokens)
+                    {
+                        Console.WriteLine("player children: " + child);
+                    }
                     JToken holeCards = playerToken.SelectToken("hole_cards");
 
                     IEnumerable<JToken> cards = holeCards.Values();
