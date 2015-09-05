@@ -12,9 +12,7 @@ namespace Nancy.Simple
 			//TODO: Use this method to return the value You want to bet
 			
 			Random r = new Random();
-		
-			return r.next(10,50);
-			
+			return r.Next(300, 500);
 		}
 
 		public static void ShowDown(JObject gameState)
