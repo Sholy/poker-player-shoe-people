@@ -25,36 +25,33 @@ namespace Nancy.Simple
 
                 foreach(JToken playerToken in players)
                 {
-                    
-                    Console.WriteLine("reading player");
-                    string playerName = (string)playerToken.SelectToken("name");
-                    Console.WriteLine("player name: " + playerName);
                     IEnumerable<JToken> childrenTokens = playerToken.Children();
+                    
                     foreach(JToken child in childrenTokens)
                     {
-                        string plName = (string)child.SelectToken("name");
-                        Console.WriteLine("pl name: " + plName);
-                        //Console.WriteLine("player children: " + child);
-                    }
-                    if (playerName == "Shoe People")
-                    {
-                        JToken holeCards = playerToken.SelectToken("hole_cards");
-
-                        IEnumerable<JToken> cards = holeCards.Values();
-                        Console.WriteLine("hole cards type: " + holeCards.Type);
-                        Console.WriteLine("cards: " + cards.ToString());
-                        Console.WriteLine("parsed cards");
-
-                        foreach (JToken card in cards)
+                        string playerName = (string)child.SelectToken("name");
+                        Console.WriteLine("pl name: " + playerName);
+                        if (playerName == "Shoe People")
                         {
-                            Console.WriteLine("reading cards");
-                            string rank = (string)card.SelectToken("rank");
-                            string suit = (string)card.SelectToken("suit");
+                            JToken holeCards = playerToken.SelectToken("hole_cards");
 
-                            Console.WriteLine("rank: " + rank);
-                            Console.WriteLine("suit: " + suit);
+                            IEnumerable<JToken> cards = holeCards.Values();
+                            Console.WriteLine("hole cards type: " + holeCards.Type);
+                            Console.WriteLine("cards: " + cards.ToString());
+                            Console.WriteLine("parsed cards");
+
+                            foreach (JToken card in cards)
+                            {
+                                Console.WriteLine("reading cards");
+                                string rank = (string)card.SelectToken("rank");
+                                string suit = (string)card.SelectToken("suit");
+
+                                Console.WriteLine("rank: " + rank);
+                                Console.WriteLine("suit: " + suit);
+                            }
                         }
                     }
+                    
                 }
             }
             catch (Exception e)
