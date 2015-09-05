@@ -9,13 +9,11 @@ namespace Nancy.Simple
 		public static int BetRequest(JObject gameState)
 		{
 			//TODO: Use this method to return the value You want to bet
-			JToken token = JObject.Parse(gameState);
-
-			int buyIn = (int)token.SelectToken("current_buy_in");
 			
 			Random r = new Random();
-			int result=r.next(10,20)+buyIn;
-			return result;
+		
+			return r.next(10,100);
+			
 		}
 
 		public static void ShowDown(JObject gameState)
