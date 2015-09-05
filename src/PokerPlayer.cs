@@ -10,10 +10,10 @@ namespace Nancy.Simple
         public static int BetRequest(JObject gameState)
         {
             //TODO: Use this method to return the value You want to bet
-            
+			int currentBuyIn=1;
             try
             {
-                int currentBuyIn = (int)gameState.SelectToken("current_buy_in");
+                currentBuyIn = (int)gameState.SelectToken("current_buy_in");
                 Console.WriteLine("Current buy in: " + currentBuyIn);
             }
             catch (Exception e)
@@ -22,8 +22,9 @@ namespace Nancy.Simple
                 Console.WriteLine(e.StackTrace);
             }
 
-            Random r = new Random();
-            return r.Next(300, 500);
+            //Random r = new Random();
+            //return r.Next(300, 500);
+			return currentBuyIn+100;
         }
 
         public static void ShowDown(JObject gameState)
