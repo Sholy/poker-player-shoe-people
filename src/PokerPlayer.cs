@@ -11,12 +11,9 @@ namespace Nancy.Simple
         public static int BetRequest(JObject gameState)
         {
             //TODO: Use this method to return the value You want to bet
-			int currentBuyIn=1;
+            int currentBuyIn = (int)gameState.SelectToken("current_buy_in");
             try
             {
-                currentBuyIn = (int)gameState.SelectToken("current_buy_in");
-                Console.WriteLine("Current buy in: " + currentBuyIn);
-
                 IEnumerable<JToken> players = gameState.SelectTokens("players");
 
                 foreach(JToken playerToken in players)
@@ -42,7 +39,7 @@ namespace Nancy.Simple
 
             //Random r = new Random();
             //return r.Next(300, 500);
-			return currentBuyIn+currentBuyIn;
+            return currentBuyIn+currentBuyIn;
         }
 
         public static void ShowDown(JObject gameState)
