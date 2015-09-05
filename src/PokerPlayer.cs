@@ -15,14 +15,19 @@ namespace Nancy.Simple
             try
             {
                 IEnumerable<JToken> players = gameState.SelectTokens("players");
+                Console.WriteLine("players parsed");
+
 
                 foreach(JToken playerToken in players)
                 {
+                    Console.WriteLine("reading player");
                     JToken holeCards = playerToken.SelectToken("hole_cards");
                     IEnumerable<JToken> cards = holeCards.Values();
+                    Console.WriteLine("parsed cards");
 
                     foreach(JToken card in cards)
                     {
+                        Console.WriteLine("reading cards");
                         string rank = (string) card.SelectToken("rank");
                         string suit = (string)card.SelectToken("suit");
 
