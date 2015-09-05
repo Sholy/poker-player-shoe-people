@@ -21,7 +21,10 @@ namespace Nancy.Simple
                 foreach(JToken playerToken in players)
                 {
                     Console.WriteLine("reading player");
+                    JToken playerName = (string)playerToken.SelectToken("name");
+                    Console.WriteLine("player name: " + playerName);
                     JToken holeCards = playerToken.SelectToken("hole_cards");
+
                     IEnumerable<JToken> cards = holeCards.Values();
                     Console.WriteLine("hole cards type: " + holeCards.Type);
                     Console.WriteLine("cards: " + cards.ToString());
