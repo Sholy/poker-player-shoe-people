@@ -16,6 +16,7 @@ namespace Nancy.Simple
             List<Card> resultCards = new List<Card>();
             try
             {
+                // Fetch player cards
                 IEnumerable<JToken> players = gameState.SelectTokens("players");
                 foreach(JToken playerToken in players)
                 {
@@ -44,6 +45,8 @@ namespace Nancy.Simple
                         }
                     }
                 }
+
+                // Fetch community cards
             }
             catch (Exception e)
             {
@@ -54,6 +57,7 @@ namespace Nancy.Simple
             //Random r = new Random();
             //return r.Next(300, 500);
 
+            int bet = currentBuyIn * currentBuyIn;
             if (resultCards.Count == 2)
             {
                 Card c1 = resultCards.First();
@@ -62,20 +66,23 @@ namespace Nancy.Simple
                 Console.WriteLine(c1);
                 Console.WriteLine(c2);
                 Console.WriteLine("Hand index: " + handIndex);
-				if (handIndex >= 15) {
-					return currentBuyIn * currentBuyIn;
-				}else if	(handIndex >= 8) {
-					return currentBuyIn + currentBuyIn;
-				}else if (handIndex >= 6) {
-					return currentBuyIn;
-				}else{
-                    return 0;
+                if (handIndex >= 15) {
+                    bet = currentBuyIn * currentBuyIn;
+                }else if	(handIndex >= 8) {
+                    bet = currentBuyIn + currentBuyIn;
+                }else if (handIndex >= 6) {
+                    bet = currentBuyIn;
+                }else{
+                    bet = 0;
                 }
             }
             else
             {
-                return currentBuyIn * currentBuyIn;
+                bet = currentBuyIn * currentBuyIn;
             }
+
+            Console.WriteLine("Bet: " + bet);
+            return bet;
         }
 
         public static int getHandIndex (Card c1,Card c2){
