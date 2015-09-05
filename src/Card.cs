@@ -90,7 +90,7 @@ namespace Nancy.Simple
                 break;
             }
         }
-        private CardRank ToCardRank(string rankString)
+        public CardRank ToCardRank(string rankString)
         {
             if (rankString == "A")
             {
@@ -148,7 +148,7 @@ namespace Nancy.Simple
             return CardRank.Ace;
         }
 
-        private CardSuit ToCardSuit(string suitString)
+        public CardSuit ToCardSuit(string suitString)
         {
             if (suitString == "spades")
             {
@@ -168,6 +168,11 @@ namespace Nancy.Simple
             }
 
             return CardSuit.Diamonds;
+        }
+
+        public override string ToString()
+        {
+            return "Card " + Rank + " " + Suit + " " + index;
         }
     }
 }

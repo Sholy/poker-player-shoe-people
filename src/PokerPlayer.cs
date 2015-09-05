@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json.Linq;
 
 namespace Nancy.Simple
@@ -48,8 +49,9 @@ namespace Nancy.Simple
                                 Card resultCard = new Card();
                                 resultCard.RankString = rank;
                                 resultCard.SuitString = suit;
-                                //resultCard.Rank = resultCard.ToCardRank(resultCard.RankString);
-                                //resultCard.Suit = resultCard.ToCardSuit(resultCard.SuitString);
+                                resultCard.Rank = resultCard.ToCardRank(resultCard.RankString);
+                                resultCard.Suit = resultCard.ToCardSuit(resultCard.SuitString);
+                                resultCard.getCardValue(resultCard);
                                 resultCards.Add(resultCard);
                             }
                         }
@@ -66,23 +68,36 @@ namespace Nancy.Simple
             //Random r = new Random();
             //return r.Next(300, 500);
 
-            //double handIndex = getHandIndex (c1, c2);
-            //if (handIndex >= 8.5) {
+            if (resultCards.Count == 2)
+            {
+                Card c1 = resultCards.First();
+                Card c2 = resultCards.Last();
+                int handIndex = getHandIndex(c1, c2);
+                Console.WriteLine(c1);
+                Console.WriteLine(c2);
+                Console.WriteLine("Hand index: " + handIndex);
+                if (handIndex >= 8)
+                {
+                    return currentBuyIn * currentBuyIn;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            else
+            {
                 return currentBuyIn * currentBuyIn;
-            //} else {
-            //    return 0;
-            //}
-
-            
+            }
         }
 
-        public static double getHandIndex (Card c1,Card c2){
-            double baseScore;
-            double gap;
+        public static int getHandIndex (Card c1,Card c2){
+            int baseScore;
+            int gap;
             if (c1.index > c2.index) {
-                baseScore = c1.index;
+                baseScore = (int)c1.index;
             }else{
-                baseScore = c2.index;
+                baseScore = (int)c2.index;
             }
             if (c1.index == c2.index) {
                 baseScore = baseScore * 2;
@@ -90,29 +105,29 @@ namespace Nancy.Simple
             if (c1.Suit == c2.Suit) {
                 baseScore = baseScore + 2;
             }
-            //gap = Math.Abs (c1.index - c2.index);
-            //switch (gap) {
-            //case 0:
-            //    break;
-            //case 1:
-            //    baseScore++;
-            //    break;
-            //case 2:
-            //    baseScore--;
-            //    break;
-            //case 3:
-            //    baseScore -= 2;
-            //        break;	
-            //case 4:
-            //    baseScore -= 4;
-            //    break;
-            //default:
-            //    baseScore -= 5;
-            //    break;
-            
-            //}
-            //return baseScore - gap;
-            return 0;
+            gap = (int)Math.Abs(c1.index - c2.index);
+            switch (gap)
+            {
+                case 0:
+                    break;
+                case 1:
+                    baseScore++;
+                    break;
+                case 2:
+                    baseScore--;
+                    break;
+                case 3:
+                    baseScore -= 2;
+                    break;
+                case 4:
+                    baseScore -= 4;
+                    break;
+                default:
+                    baseScore -= 5;
+                    break;
+
+            }
+            return baseScore - gap;
         }
 
         public static void ShowDown(JObject gameState)
