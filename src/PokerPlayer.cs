@@ -17,14 +17,6 @@ namespace Nancy.Simple
             try
             {
                 IEnumerable<JToken> players = gameState.SelectTokens("players");
-                IEnumerable<JToken> gameChildren = gameState.Children();
-                foreach(JToken child in gameChildren)
-                {
-                    //Console.WriteLine(child);
-                }
-                Console.WriteLine("players parsed");
-
-
                 foreach(JToken playerToken in players)
                 {
                     IEnumerable<JToken> childrenTokens = playerToken.Children();
@@ -32,19 +24,14 @@ namespace Nancy.Simple
                     foreach(JToken child in childrenTokens)
                     {
                         string playerName = (string)child.SelectToken("name");
-                        Console.WriteLine("pl name: " + playerName);
                         if (playerName == "Shoe People")
                         {
                             JToken holeCards = child.SelectToken("hole_cards");
 
                             foreach(JToken card in holeCards.Children())
                             {
-                                Console.WriteLine("reading cards as children");
                                 string rank = (string)card.SelectToken("rank");
                                 string suit = (string)card.SelectToken("suit");
-
-                                Console.WriteLine("rank child: " + rank);
-                                Console.WriteLine("suit child: " + suit);
 
                                 Card resultCard = new Card();
                                 resultCard.RankString = rank;
@@ -56,7 +43,6 @@ namespace Nancy.Simple
                             }
                         }
                     }
-                    
                 }
             }
             catch (Exception e)
