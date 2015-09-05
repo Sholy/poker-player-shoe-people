@@ -33,7 +33,7 @@ namespace Nancy.Simple
                         Console.WriteLine("pl name: " + playerName);
                         if (playerName == "Shoe People")
                         {
-                            JToken holeCards = playerToken.SelectToken("hole_cards");
+                            JToken holeCards = child.SelectToken("hole_cards");
 
                             IEnumerable<JToken> cards = holeCards.Values();
                             Console.WriteLine("hole cards type: " + holeCards.Type);
