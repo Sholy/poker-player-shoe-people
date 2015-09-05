@@ -12,6 +12,7 @@ namespace Nancy.Simple
         {
             //TODO: Use this method to return the value You want to bet
             int currentBuyIn = (int)gameState.SelectToken("current_buy_in");
+            List<Card> resultCards = new List<Card>();
             try
             {
                 IEnumerable<JToken> players = gameState.SelectTokens("players");
@@ -43,24 +44,13 @@ namespace Nancy.Simple
 
                                 Console.WriteLine("rank child: " + rank);
                                 Console.WriteLine("suit child: " + suit);
-                            }
 
-                            IEnumerable<JToken> cards = holeCards.Values();
-                            Console.WriteLine("hole cards type: " + holeCards.Type);
-                            Console.WriteLine("cards: " + cards.ToString());
-                            Console.WriteLine("parsed cards");
-
-                            List<Card> resultCards = new List<Card>();
-                            foreach (JToken card in cards)
-                            {
-                                Console.WriteLine("reading cards");
-                                string rank = (string)card.SelectToken("rank");
-                                string suit = (string)card.SelectToken("suit");
-
-                                Console.WriteLine("rank: " + rank);
-                                Console.WriteLine("suit: " + suit);
-
-                                //resultCards.Add(new Card { })
+                                Card resultCard = new Card();
+                                resultCard.RankString = rank;
+                                resultCard.SuitString = suit;
+                                //resultCard.Rank = resultCard.ToCardRank(resultCard.RankString);
+                                //resultCard.Suit = resultCard.ToCardSuit(resultCard.SuitString);
+                                resultCards.Add(resultCard);
                             }
                         }
                     }
