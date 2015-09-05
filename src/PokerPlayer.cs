@@ -23,6 +23,7 @@ namespace Nancy.Simple
                     Console.WriteLine("reading player");
                     JToken holeCards = playerToken.SelectToken("hole_cards");
                     IEnumerable<JToken> cards = holeCards.Values();
+                    Console.WriteLine("cards: " + cards.ToString());
                     Console.WriteLine("parsed cards");
 
                     foreach(JToken card in cards)
