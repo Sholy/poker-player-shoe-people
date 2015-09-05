@@ -12,7 +12,7 @@ namespace Nancy.Simple
 			
 			Random r = new Random();
 		
-			return r.next(10,100);
+			return r.next(10,50);
 			
 		}
 
