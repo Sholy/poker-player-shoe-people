@@ -62,12 +62,13 @@ namespace Nancy.Simple
                 Console.WriteLine(c1);
                 Console.WriteLine(c2);
                 Console.WriteLine("Hand index: " + handIndex);
-                if (handIndex >= 8)
-                {
-                    return currentBuyIn * currentBuyIn;
-                }
-                else
-                {
+				if (handIndex >= 15) {
+					return currentBuyIn * currentBuyIn;
+				}else if	(handIndex >= 8) {
+					return currentBuyIn + currentBuyIn;
+				}else if (handIndex >= 6) {
+					return currentBuyIn;
+				}else{
                     return 0;
                 }
             }
@@ -86,7 +87,7 @@ namespace Nancy.Simple
                 baseScore = (int)c2.index;
             }
             if (c1.index == c2.index) {
-                baseScore = baseScore * 2;
+                baseScore = baseScore * 2+5;
             }
             if (c1.Suit == c2.Suit) {
                 baseScore = baseScore + 2;
