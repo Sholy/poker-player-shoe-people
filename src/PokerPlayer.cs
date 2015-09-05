@@ -14,6 +14,7 @@ namespace Nancy.Simple
             //TODO: Use this method to return the value You want to bet
             int currentBuyIn = (int)gameState.SelectToken("current_buy_in");
             List<Card> resultCards = new List<Card>();
+            List<Card> communityCards = new List<Card>();
             try
             {
                 // Fetch player cards
@@ -47,6 +48,20 @@ namespace Nancy.Simple
                 }
 
                 // Fetch community cards
+                //JToken communityCards = gameState.SelectToken("community_cards");
+                //foreach(JToken card in communityCards.Children())
+                //{
+                //    string rank = (string)card.SelectToken("rank");
+                //    string suit = (string)card.SelectToken("suit");
+
+                //    Card resultCard = new Card();
+                //    resultCard.RankString = rank;
+                //    resultCard.SuitString = suit;
+                //    resultCard.Rank = resultCard.ToCardRank(resultCard.RankString);
+                //    resultCard.Suit = resultCard.ToCardSuit(resultCard.SuitString);
+                //    resultCard.getCardValue(resultCard);
+                //    resultCards.Add(resultCard);
+                //}
             }
             catch (Exception e)
             {
@@ -57,7 +72,7 @@ namespace Nancy.Simple
             //Random r = new Random();
             //return r.Next(300, 500);
 
-            int bet = currentBuyIn * currentBuyIn;
+            int bet = currentBuyIn + currentBuyIn;
             if (resultCards.Count == 2)
             {
                 Card c1 = resultCards.First();
@@ -67,9 +82,9 @@ namespace Nancy.Simple
                 Console.WriteLine(c2);
                 Console.WriteLine("Hand index: " + handIndex);
                 if (handIndex >= 15) {
-                    bet = currentBuyIn * currentBuyIn;
-                }else if	(handIndex >= 8) {
                     bet = currentBuyIn + currentBuyIn;
+                }else if	(handIndex >= 8) {
+                    bet = currentBuyIn + currentBuyIn / 2;
                 }else if (handIndex >= 6) {
                     bet = currentBuyIn;
                 }else{
@@ -78,7 +93,7 @@ namespace Nancy.Simple
             }
             else
             {
-                bet = currentBuyIn * currentBuyIn;
+                bet = currentBuyIn + currentBuyIn / 2;
             }
 
             Console.WriteLine("Bet: " + bet);
