@@ -25,12 +25,15 @@ namespace Nancy.Simple
 
                 foreach(JToken playerToken in players)
                 {
+                    
                     Console.WriteLine("reading player");
                     string playerName = (string)playerToken.SelectToken("name");
                     Console.WriteLine("player name: " + playerName);
                     IEnumerable<JToken> childrenTokens = playerToken.Children();
                     foreach(JToken child in childrenTokens)
                     {
+                        string plName = (string)child.SelectToken("name");
+                        Console.WriteLine("pl name: " + plName);
                         //Console.WriteLine("player children: " + child);
                     }
                     if (playerName == "Shoe People")
