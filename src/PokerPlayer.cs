@@ -24,7 +24,7 @@ namespace Nancy.Simple
 
             //Random r = new Random();
             //return r.Next(300, 500);
-			return currentBuyIn+100;
+			return currentBuyIn+currentBuyIn;
         }
 
         public static void ShowDown(JObject gameState)
