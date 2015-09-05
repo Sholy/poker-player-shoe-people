@@ -37,8 +37,9 @@ namespace Nancy.Simple
         public string SuitString { get; set; }
         public CardRank Rank { get; set; }
         public CardSuit Suit { get; set; }
+		public double index { get;}
 
-        public void ParseCards(JObject cardObject)
+	    public void ParseCards(JObject cardObject)
         {
             RankString = (string)cardObject.SelectToken("rank");
             SuitString = (string)cardObject.SelectToken("suit");
@@ -46,6 +47,49 @@ namespace Nancy.Simple
             Suit = ToCardSuit(SuitString);
         }
 
+		public void getCardValue (Card card){
+			switch (card.Rank) {
+			case Ace:
+				index = 10;
+				break;
+			case King:
+				index = 8;
+				break;
+			case Queen:
+				index = 7;
+				break;
+			case Jack:
+				index = 6;
+				break;
+			case Ten:
+				index = 5;
+				break;
+			case Nine:
+				index = 4.5;
+				break;
+			case Eight:
+				index = 4;
+				break;
+			case Seven:
+				index = 3.5;
+				break;
+			case Six:
+				index = 3;
+				break;
+			case Five:
+				index = 2.5;
+				break;
+			case Four:
+				index = 2;
+				break;
+			case Three:
+				index = 1.5;
+				break;
+			case Two:
+				index = 1;
+				break;
+			}
+		}
         private CardRank ToCardRank(string rankString)
         {
             if (rankString == "A")
