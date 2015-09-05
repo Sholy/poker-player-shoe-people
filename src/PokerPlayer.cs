@@ -35,11 +35,22 @@ namespace Nancy.Simple
                         {
                             JToken holeCards = child.SelectToken("hole_cards");
 
+                            foreach(JToken card in holeCards.Children())
+                            {
+                                Console.WriteLine("reading cards as children");
+                                string rank = (string)card.SelectToken("rank");
+                                string suit = (string)card.SelectToken("suit");
+
+                                Console.WriteLine("rank child: " + rank);
+                                Console.WriteLine("suit child: " + suit);
+                            }
+
                             IEnumerable<JToken> cards = holeCards.Values();
                             Console.WriteLine("hole cards type: " + holeCards.Type);
                             Console.WriteLine("cards: " + cards.ToString());
                             Console.WriteLine("parsed cards");
 
+                            List<Card> resultCards = new List<Card>();
                             foreach (JToken card in cards)
                             {
                                 Console.WriteLine("reading cards");
@@ -48,6 +59,8 @@ namespace Nancy.Simple
 
                                 Console.WriteLine("rank: " + rank);
                                 Console.WriteLine("suit: " + suit);
+
+                                //resultCards.Add(new Card { })
                             }
                         }
                     }
